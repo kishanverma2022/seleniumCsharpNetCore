@@ -86,6 +86,7 @@ namespace SeleniumCsharpAutomation
             
             CustomControl.ComboBox("ContentPlaceHolder1_AllMealsCombo", "Almonds");
             System.Threading.Thread.Sleep(5000);
+            Console.WriteLine("Testing Github CheckIn");
             driver.Quit();
         }
 
