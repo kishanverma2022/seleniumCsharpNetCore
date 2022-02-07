@@ -2,7 +2,9 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using SeleniumCsharpAutomation.Pages;
 using System;
+using System.Threading;
 
 namespace SeleniumCsharpAutomation
 {
@@ -17,16 +19,19 @@ namespace SeleniumCsharpAutomation
             driver = new ChromeDriver();
         }
 
-        // [Test]
+        //[Test]
         //public void Test1()
         //{
         //    driver.Navigate().GoToUrl("https://demowf.aspnetawesome.com/");
-        //    driver.FindElement(By.Id("ContentPlaceHolder1_Meal")).SendKeys("Tomato");
+        //    System.Threading.Thread.Sleep(3000);
+        //    CustomControl.EnterText(driver.FindElement(By.Id("ContentPlaceHolder1_Meal")),"Tomato");
+        //    CustomControl.Click(driver.FindElement(By.XPath("//Input[@class='ctl00$ContentPlaceHolder1$ChildMeal1']")));
         //    Assert.Pass();
+        //    driver.Quit();
         //}
 
         //[Test]
-        //public void Test2()
+        //public void Test2() 
         //{
 
         //    driver.Navigate().GoToUrl("https://www.spicejet.com/");
@@ -59,35 +64,53 @@ namespace SeleniumCsharpAutomation
         //public void ddrDownProgram()
         //{
         //    driver.Navigate().GoToUrl("https://demowf.aspnetawesome.com/");
-        //    SelectElement select = new SelectElement(driver.FindElement(By.Id("ContentPlaceHolder1_Add1-awed")));
+        //    //SelectElement select = new SelectElement(driver.FindElement(By.Id("ContentPlaceHolder1_Add1-awed")));
         //    System.Threading.Thread.Sleep(5000);
-        //    select.SelectByText("Broccoli");
+        //    CustomControl.SelectByText(driver.FindElement(By.Id("ContentPlaceHolder1_Add1-awed")), "Broccoli");
+        //    // select.SelectByText("Broccoli");
         //    System.Threading.Thread.Sleep(5000);
         //    driver.Quit();
 
-
         //}
-        //[Test]
-        //public void ddrDownProgram()
+            //}
+            //[Test]
+            //public void ddrDownProgram()
+            //{
+            //    driver.Navigate().GoToUrl("https://demowf.aspnetawesome.com/");
+            //    System.Threading.Thread.Sleep(3000);
+            //    driver.FindElement(By.XPath("//div[contains(text(),'Celery')]")).Click();
+
+            //    System.Threading.Thread.Sleep(5000);
+            //    driver.Quit();
+            //}
+
+          //  [Test]
+        //public void comboboxProgram()
         //{
         //    driver.Navigate().GoToUrl("https://demowf.aspnetawesome.com/");
         //    System.Threading.Thread.Sleep(3000);
-        //    driver.FindElement(By.XPath("//div[contains(text(),'Celery')]")).Click();
             
+        //    CustomControl.ComboBox("ContentPlaceHolder1_AllMealsCombo", "Almonds");
         //    System.Threading.Thread.Sleep(5000);
+        //    Console.WriteLine("Testing Github CheckIn");
         //    driver.Quit();
         //}
-
         [Test]
-        public void comboboxProgram()
+        public void LoginTest()
         {
-            driver.Navigate().GoToUrl("https://demowf.aspnetawesome.com/");
-            System.Threading.Thread.Sleep(3000);
-            
-            CustomControl.ComboBox("ContentPlaceHolder1_AllMealsCombo", "Almonds");
-            System.Threading.Thread.Sleep(5000);
-            Console.WriteLine("Testing Github CheckIn");
+            driver.Navigate().GoToUrl("http://eaapp.somee.com/");
+            HomePage homepage = new HomePage();
+            homepage.ClickLogin1();
+            Thread.Sleep(5000);
+            LoginPage loginpage = new LoginPage();
+            loginpage.EnterUserNameAndPassword("admin", "password");
+            Thread.Sleep(3000);
+            loginpage.ClickLoginbtn();
+            Thread.Sleep(3000);
+            Assert.That(homepage.IslogOffExist, Is.True,"LogOff button is not avaliable on the page");
             driver.Quit();
+
+
         }
 
     }
